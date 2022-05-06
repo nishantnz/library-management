@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header class="header d-flex justify-content-center align-items-center g-3 p-3">
+        <img src="img/bookStack.jpg" width="90px" alt="">
+        <h1 class="title">Library Management</h1>
+    </header>
+    <nav class="d-flex">
+        <a href="admin_dashboard.html" class="d-block p-2 links text-center text-deco-none capitalize link-shadow">Admin Dashboard</a>
+        <a href="admin_addbooks.html" class="d-block p-2 links text-center text-deco-none capitalize active-shadow">Add books</a>
+        <a href="admin_updatebooks.html" class="d-block p-2 links text-center text-deco-none capitalize link-shadow">Update Books</a>
+        <a href="admin_issuedbooks.html" class="d-block p-2 links text-center text-deco-none capitalize link-shadow">Issued Books</a>
+        <a href="admin_viewbooks.html" class="d-block p-2 links text-center text-deco-none capitalize link-shadow">View Books</a>
+        <button type="button" class="d-block p-2 links text-center text-deco-none capitalize link-shadow">Logout</button>
+    </nav>
+    <main class="d-flex dir-col justify-content-center align-items-center">
+        <h1 class="title text-center mt-3 mb-2 uppercase letter-space">ADD BOOKS</h1>
+        <div class="login-template">            
+            <form action="">
+                <div class="d-flex dir-col">
+                    <label for="email" class="input-label">
+                        Book Name:
+                    </label>
+                    <input type="text" name="email" id="email" class="fb-100 input-style">
+                </div>
+                <div class="d-flex dir-col">
+                    <label for="pword" class="input-label">
+                        Book ID:
+                    </label>
+                    <input type="text" disabled name="password" id="pword" class="fb-100 input-style">
+                </div>
+                <div class="d-flex dir-col">
+                    <label for="email" class="input-label">
+                        Author Name:
+                    </label>
+                    <input type="text" name="email" id="email" class="fb-100 input-style">
+                </div>
+                <div class="d-flex dir-col">
+                    <label for="pword" class="input-label">
+                        Quantity:
+                    </label>
+                    <input type="number" min="1" name="password" id="pword" class="fb-100 input-style">
+                </div> 
+                <button type="submit" id="login-submit" class="large btn btn-semi-dark px-2 mi-auto mb-4">Add To Database</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>
