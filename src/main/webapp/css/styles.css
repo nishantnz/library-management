@@ -26,9 +26,9 @@ p,h1,h4,h5,h6 {
   padding: 0;
   margin: 0;
 }
-/* body {
+body {
   background: var(--page-bg);
-} */
+}
 /*----------------------------------------- different sizes of containers */
 .container-sm {
   width: min(550px, 75%);
@@ -80,31 +80,62 @@ p,h1,h4,h5,h6 {
   color: white;
 }
 /* top part ends */
+/* navigation starts */
+nav{
+  background-color: white;
+}
+.links{
+  flex-basis: 100%;
+  flex-shrink: 1;
+  font-size: 1.2rem;
+  font-family: var(--font-product);
+  color: black;
+  font-weight: 500;
+  letter-spacing: .5mm;
+  background-color: transparent;
+  border: none;
+}
+.link-shadow:hover{
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+}
+.link-shadow{
+  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.5);
+}
+.active-shadow{
+  background-color: var(--page-bg);
+  box-shadow: 3px -4px 4px rgba(0, 0, 0, 0.5);
+}
 
+
+/* navigation ends */
+/* Table styles starts */
+
+table {
+  border-collapse: collapse;
+  width: 600px;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+  font-family: var(--font-content);
+}
+
+tr:nth-child(even){background-color: white}
+tr:nth-child(odd){background-color:#747474 }
+
+
+th {
+  background-color:var(--hover-shadow);
+  color: black;
+}
+
+/* Table styles ends */
 /* Styling for the button */
 .btn {
-  display: block;
-  padding: 0.5em;
-  margin: 1em 0;
-  font-family: sans-serif ;
-  text-transform: capitalize;
-  border: 0;
+  padding: .5em 1em;
   border-radius: 10px;
-}
-.btn-blank{
-  color: black;
-  display: block;
-  margin-bottom:1em;
-  border: 0;
-  background-color: transparent;
-  font-family: "Montserrat";
-  font-size: .9rem;
-  font-weight: 700;
-  /* text-decoration: underline; */
-}
-.btn-accent:active{
-  background:#8a6f06;
-  color:white;
+  border: none;
 }
 .btn-semi-dark {
   background: black;
@@ -114,7 +145,30 @@ p,h1,h4,h5,h6 {
 .btn-semi-dark:active{
   background:white;
   color:black;
+  padding: .33em .8em;
   border: 5px solid black;
+}
+.btn-edit{
+  background:var(--lightBlue);
+  color:white;
+}
+.btn-edit:active{
+  background: var(--lightBlue);
+  color:white;
+  padding: .2em .7em;
+  border: 5px rgba(76, 168, 255, 0.578);
+  border-style: outset;
+}
+.btn-del{
+  background: #c31;
+  color: white;
+}
+.btn-del:active{
+  background:#c31;
+  color:white;
+  padding: .2em .7em;
+  border: 5px rgba(81, 80, 80, 0.559);
+  border-style: outset;
 }
 .input-label {
   display: block;
@@ -138,6 +192,10 @@ p,h1,h4,h5,h6 {
   font-size: 1.2rem;
   font-weight: 400;
   color: #434;
+}
+.input-style:disabled{
+  background-color: #7b7b7b;
+  color: white;
 }
 select.input-style{
   appearance: auto;
@@ -188,6 +246,9 @@ select.input-style{
 .text-justify{
   text-align: justify;
 }
+.text-deco-none{
+  text-decoration: none;
+}
 .letter-space{
   letter-spacing: 1mm;
 }
@@ -208,6 +269,9 @@ select.input-style{
 /* Box related starts  */
 .border {
   border: 1px solid black;
+}
+.b-radius {
+  border-radius: 10px;
 }
 .b-radius-subtle {
   border-radius: 5px;
@@ -363,8 +427,14 @@ select.input-style{
 .mb-4{
   margin-bottom: 2em;  
 }
+.mb-5{
+  margin-bottom: 3em;  
+}
+.mt-2{
+  margin-top: 1em;
+}
 .mt-3{
-  margin-top: 1.5em;
+  margin-top: 2em;
 }
 .m-0{
   margin: 0;
@@ -408,12 +478,4 @@ select.input-style{
   .flex-sm-nowrap{
     flex-wrap: nowrap;
   }
-}
-
-*{
-  -webkit-print-color-adjust: exact !important;   /* Chrome, Safari, Edge */
-  color-adjust: exact !important;                 /*Firefox*/
-}
-@page {
-  margin: 0;
 }

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header class="header d-flex justify-content-center align-items-center g-3 p-3">
+        <img src="img/bookStack.jpg" width="90px" alt="">
+        <h1 class="title">Library Management</h1>
+    </header>
+    <nav class="d-flex">
+        <button type="button" id="dash-btn" class="d-block p-2 links text-center text-deco-none capitalize active-shadow">Admin Dashboard</button>
+        <button type="button" id="add-btn" class="d-block p-2 links text-center text-deco-none capitalize link-shadow">Add books</button>
+        <button type="button" id="update-btn" class="d-block p-2 links text-center text-deco-none capitalize link-shadow">Update Books</button>
+        <button type="button" id="issued-btn" class="d-block p-2 links text-center text-deco-none capitalize link-shadow">Issued Books</button>
+        <button type="button" id="view-btn" class="d-block p-2 links text-center text-deco-none capitalize link-shadow">View Books</button>
+        <button type="button" id="btn" class="d-block p-2 links text-center text-deco-none capitalize link-shadow">Logout</button>
+    </nav>
+    <div id="admin-dash" class="d-block">
+        <h1>admin dash</h1>
+    </div>
+    <div id="add-books" class="d-none">
+        <div class="d-flex dir-col justify-content-center align-items-center">
+            <h1 class="title text-center mt-3 mb-2 uppercase letter-space">ADD BOOKS</h1>
+            <div class="login-template">            
+                <form action="">
+                    <div class="d-flex dir-col">
+                        <label for="bookname" class="input-label">
+                            Book Name:
+                        </label>
+                        <input type="text" name="bookname" id="bookname" class="fb-100 input-style">
+                    </div>
+                    <div class="d-flex dir-col">
+                        <label for="bookid" class="input-label">
+                            Book ID:
+                        </label>
+                        <input type="text" disabled name="bookid" id="bookid" class="fb-100 input-style">
+                    </div>
+                    <div class="d-flex dir-col">
+                        <label for="authorname" class="input-label">
+                            Author Name:
+                        </label>
+                        <input type="text" name="authorname" id="authorname" class="fb-100 input-style">
+                    </div>
+                    <div class="d-flex dir-col">
+                        <label for="quantity" class="input-label">
+                            Quantity:
+                        </label>
+                        <input type="number" min="1" name="quantity" id="quantity" class="fb-100 input-style">
+                    </div> 
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" id="login-submit" class="large btn btn-semi-dark px-2 mb-4 mt-2">Add To Database</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="update-books" class="d-none">
+
+        <h1 class="title text-center mt-3 mb-2 uppercase letter-space">Search books to update</h1>
+        <div class="container-sm mt-3 mb-5">
+            <form action="">
+                <div class="d-flex justify-content-center flex-wrap">
+                    <input type="text" name=""  class="input-style fb-60" id="search">
+                    <select name="" id="" class="input-style">
+                        <option value="book_id">Book ID</option>
+                        <option value="book_name">Book Name</option>
+                        <option value="author">Author</option>
+                    </select>
+                    <button class="btn btn-semi-dark large mt-2">Search</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+    <div id="issued-books" class="d-none">
+        <h1>issued books</h1>
+    </div>
+    <div id="view-books" class="d-none">
+        <h1>view books</h1>
+    </div>
+<script src="js/tabFormat.js"></script>
+</body>
+</html>
