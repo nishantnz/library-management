@@ -143,8 +143,8 @@
              									<td><%=rs.getString("authorName")%></td>
              									<td><%= rs.getInt("quantity")%></td>
              									<td>
-             									<button>Edit</button>
-             									<button>Delete</button>	
+             									<button class="edit medium btn btn-edit">Edit</button>
+             									<button class="del medium btn btn-del">Delete</button>	
              									</td>
              									</tr>
              								
@@ -169,5 +169,7 @@
         <h1>view books</h1>
     </div>
 <script src="../js/tabFormat.js"></script>
+<script src="../js/updatebooks.js"></script>
+
 </body>
 </html>

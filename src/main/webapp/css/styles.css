@@ -213,6 +213,50 @@ select.input-style{
   accent-color: #f1c40f;
   margin-top: .5em;
 }
+/* Styles for modal starts*/
+#modal{
+  width: 320px;
+  background-color: #333;
+  position: fixed;
+  top: 60px;
+  left: 50%;
+  transform: translate(-50%);
+  z-index: 2;
+}
+#cover-screen{
+  position: fixed;
+  inset: 0;
+  background-color: rgba(4, 4, 4, 0.523);
+  z-index: 1;
+}
+.input-style-m{
+  appearance: none;
+  outline: none;
+  border: 3px solid rgb(99, 57, 99);
+  border-radius: 7px;
+  background-color: #f2f2f2;
+  padding: 0.6em;
+  margin-top: 0;
+  font-family: "Roboto Condensed";
+  font-size: .9rem;
+  font-weight: 400;
+  color: rgb(36, 28, 36);
+}
+.input-style-m:disabled {
+  background-color: var(--darkish);
+  color: black;
+}
+.input-label-m {
+  display: block;
+  padding: 0.5em;
+  font-family: var(--font-content);
+  font-size: 1rem;
+  font-weight: 900;
+  color: white;
+  position: relative;
+}
+/* Styles for modal Ends*/
+
 /* ------------------- Utility Classes --------------------- */
 
 /* Font sizes start*/
@@ -271,7 +315,7 @@ select.input-style{
   border: 1px solid black;
 }
 .b-radius {
-  border-radius: 10px;
+  border-radius: 15px;
 }
 .b-radius-subtle {
   border-radius: 5px;
@@ -438,6 +482,9 @@ select.input-style{
 }
 .m-0{
   margin: 0;
+}
+.p-0{
+  padding: 0;
 }
 /* margin ends */
 

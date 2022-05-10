@@ -75,6 +75,67 @@
                 </div>
             </form>
         </div>
+        <div class="d-flex justify-content-center mt-3 mb-5">
+            <table>
+                <tr>
+                    <th>Book ID :</th>
+                    <th>Book Name :</th>
+                    <th>Author :</th>
+                    <th>Quantity :</th>
+                    <th>Edit :</th>
+                    <th>Delete :</th>
+    
+                </tr>
+                <tr>
+                    <td>34</td>
+                    <td>Dummy </td>
+                    <td>Dummy</td>
+                    <td>56</td>
+                    <td><button class="edit medium btn btn-edit">Edit</button></td>
+                    <td><button class="del medium btn btn-del">Delete</button></td>
+                </tr>
+                <tr>
+                    <td>34</td>
+                    <td>Dummy </td>
+                    <td>Dummy</td>
+                    <td>56</td>
+                    <td><button class="edit medium btn btn-edit">Edit</button></td>
+                    <td><button class="del medium btn btn-del">Delete</button></td>
+                </tr>
+                <tr>
+                    <td>34</td>
+                    <td>Dummy </td>
+                    <td>Dummy</td>
+                    <td>56</td>
+                    <td><button class="edit medium btn btn-edit">Edit</button></td>
+                    <td><button class="del medium btn btn-del">Delete</button></td>
+                </tr>
+                <tr>
+                    <td>34</td>
+                    <td>Dummy </td>
+                    <td>Dummy</td>
+                    <td>56</td>
+                    <td><button class="edit medium btn btn-edit">Edit</button></td>
+                    <td><button class="del medium btn btn-del">Delete</button></td>
+                </tr>
+            </table>
+        </div>
+        <div class="d-none" id="cover-screen">
+            <!-- Empty. as this will only cover the screen for the modal -->
+        </div>
+        <form action="" id="modal" class="d-none b-radius">
+            <div class="d-flex dir-col justify-content-center p-4">
+                <label for="bookidmod" class="input-label-m">Book ID :</label>
+                <input type="text" id="bookidmod" name="bookid" disabled class="input-style-m mb-2">
+                <label for="booknamemod" class="input-label-m p-0 m-0">Book Name :</label>
+                <input type="text" id="booknamemod" name="bookname" class="input-style-m mb-2">
+                <label for="authornamemod" class="input-label-m">Author Name : </label>
+                <input type="text" id="authornamemod" name="authorname" class="input-style-m mb-2">
+                <label for="quantitymod" class="input-label-m">Quantity : </label>
+                <input type="number" min="1" id="quantitymod" name="quantity" class="input-style-m mb-3">
+                <button type="submit" class="btn btn-edit medium">Update</button>
+            </div>
+        </form>
 
     </div>
     <div id="issued-books" class="d-none">
@@ -84,5 +145,6 @@
         <h1>view books</h1>
     </div>
 <script src="js/tabFormat.js"></script>
+<script src="js/updatebooks.js"></script>
 </body>
 </html>
