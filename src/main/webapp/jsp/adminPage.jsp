@@ -150,6 +150,7 @@
              								
              								<%
              							}
+             							pstmt.close();
              							%>
              							</table>
              							<%
@@ -160,8 +161,62 @@
              				}
              				%>
         </div>
+          <div class="d-none" id="cover-screen">
+            <!-- Empty. as this will only cover the screen for the modal -->
+        </div>
+        <form action = "" id="modal" class="d-none b-radius">
+            <div class="d-flex dir-col justify-content-center p-4">
+                <label for="bookidmod" class="input-label-m">Book ID :</label>
+                <input type="text" id="bookidmod" readonly name="bookid" class="input-style-m mb-2">
+                <label for="booknamemod" class="input-label-m p-0 m-0">Book Name :</label>
+                <input type="text" id="booknamemod" name="bookname" class="input-style-m mb-2">
+                <label for="authornamemod" class="input-label-m">Author Name : </label>
+                <input type="text" id="authornamemod" name="authorname" class="input-style-m mb-2">
+                <label for="quantitymod" class="input-label-m">Quantity : </label>
+                <input type="number" min="1" id="quantitymod" name="quantity" class="input-style-m mb-3">
+                <button type="submit" class="btn btn-edit medium" name = "update-btn" value = "Update">Update</button>
+            </div>
+        </form>
+        
+        <% 
+        	String updateBtn = request.getParameter("update-btn");
+        	String bookName = request.getParameter("bookname");
+        	String author = request.getParameter("authorname");
+        	String quantity =request.getParameter("quantity");
+        	String id =request.getParameter("bookid");
+        	
+        	if(updateBtn == null)System.out.println("null");        	
+        	else if(updateBtn.equalsIgnoreCase("Update")){
+        		try{
+            		Class.forName("com.mysql.cj.jdbc.Driver");
+            	connection = DriverManager.getConnection(jdbcUrl,userName,dbPass);
+            	if(connection != null){
+            		query = "UPDATE `BOOKS` SET bookName =?, authorName=?, quantity=? where bookid=?";
+            		pstmt = connection.prepareStatement(query);
+            		pstmt.setString(1,bookName);
+            		pstmt.setString(2,author);
+            		pstmt.setString(3,quantity);
+            		pstmt.setString(4, id);
+            		pstmt.executeUpdate();
+            		%>
+            		<script>
+            			alert("Data updated successfully");
+            		</script>
+            		<%
+            		
+            	}
+        		}catch(SQLException e){
+            		out.println("Error: \n"+e);
+            		}
+        	}
+        	
+        	
+        	
+        
+        %>
 
     </div>
+    
     <div id="issued-books" class="d-none">
         <h1>issued books</h1>
     </div>
