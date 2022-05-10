@@ -46,6 +46,10 @@ out.println("userRole: "+userRole);
 			 		rs = pstmt.executeQuery();
 			 		if(rs.next()){
 			 				if(rs.getString("password").equals(password)){
+			 					session.setAttribute("firstName",rs.getString("first_name"));
+			 					session.setAttribute("lastName",rs.getString("last_name"));
+			 					session.setAttribute("email",email);
+			 					
 			 					response.sendRedirect("userPage.jsp");
 			 				}else{
 			 						%>
@@ -76,6 +80,7 @@ out.println("userRole: "+userRole);
 			 			rs = pstmt.executeQuery();
 			 			if(rs.next()){
 			 				if(rs.getString("password").equals(password)){
+			 					session.setAttribute("email",email);
 			 				response.sendRedirect("adminPage.jsp");
 			 				}else{
 			 					%>
