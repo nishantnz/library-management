@@ -137,16 +137,21 @@
              							rs = pstmt.executeQuery();
              							while(rs.next()){
              								%>
+             						
              									<tr>
-             									<td><%=rs.getInt("bookid")%></td>
+             									<td name = "bookId"><%=rs.getInt("bookid")%></td>
              									<td><%=rs.getString("bookName")%></td>
              									<td><%=rs.getString("authorName")%></td>
              									<td><%= rs.getInt("quantity")%></td>
+             								
              									<td>
              									<button class="edit medium btn btn-edit">Edit</button>
-             									<button class="del medium btn btn-del">Delete</button>	
+             									<button class="del medium btn btn-del" name = "delete-btn" value = "Delete">Delete</button>	
+             									
              									</td>
+             									
              									</tr>
+             									
              								
              								<%
              							}
@@ -160,7 +165,9 @@
              					out.println("Error: \n"+e);
              				}
              				%>
-        </div>
+             				
+             						
+             				        </div>
           <div class="d-none" id="cover-screen">
             <!-- Empty. as this will only cover the screen for the modal -->
         </div>
@@ -209,10 +216,6 @@
             		out.println("Error: \n"+e);
             		}
         	}
-        	
-        	
-        	
-        
         %>
 
     </div>
@@ -220,9 +223,34 @@
     <div id="issued-books" class="d-none">
         <h1>issued books</h1>
     </div>
-    <div id="view-books" class="d-none">
-        <h1>view books</h1>
+    <div id="view-books" style = "margin-top:90px" class="d-none">
+    	<table style = "margin:auto">
+    	<th>BookId</th>
+    	<th>BookName</th>
+    	<th>AuthorName</th>
+    	<th>Quantity</th>
+        
+        <%
+        	connection = DriverManager.getConnection(jdbcUrl,userName,dbPass);
+        	if(connection !=null){
+        		query = "select * from books";
+        		pstmt = connection.prepareStatement(query);
+        		rs = pstmt.executeQuery();
+        		while(rs.next()){
+        			%>
+        			<tr>
+        			<td><%=rs.getString("bookid")%></td>
+        			<td><%=rs.getString("bookName")%></td>
+        			<td><%=rs.getString("authorName")%></td>
+        			<td><%=rs.getString("quantity")%></td>
+        			</tr>	
+        		<%
+        		}
+        	}
+        %>
+        </table>
     </div>
+    
 <script src="../js/tabFormat.js"></script>
 <script src="../js/updatebooks.js"></script>
 
