@@ -4,9 +4,15 @@
     <%@page import = "java.sql.*"%>
   
     <%
+   	response.setHeader("Cache-Control","no-cache");
+	response.setHeader("Cache-Control","no-store");
+	response.setHeader("Pragma","no-cache");
+	response.setDateHeader ("Expires", 0);
     String email = (String)session.getAttribute("email");
     if(email == null){
-		response.sendRedirect("../login.html");		
+    	session.invalidate();
+    	response.sendRedirect("../login.html");
+		
 	}
     Connection connection = null;
     PreparedStatement pstmt = null;
@@ -36,9 +42,25 @@
         <button type="button" id="update-btn" class="d-block p-2 links text-center text-deco-none capitalize link-shadow">Update Books</button>
         <button type="button" id="issued-btn" class="d-block p-2 links text-center text-deco-none capitalize link-shadow">Issued Books</button>
         <button type="button" id="view-btn" class="d-block p-2 links text-center text-deco-none capitalize link-shadow">View Books</button>
-        <button type="button" id="btn" class="d-block p-2 links text-center text-deco-none capitalize link-shadow" name ="logoutbtn">Logout</button>
-        
+        <form>
+        <button type="submit" id="btn" class="d-block p-2 links text-center text-deco-none capitalize link-shadow" name ="logoutbtn" value = "Logout">Logout</button>
+    	</form>
+    	<%
+    		String logoutBtn = request.getParameter("logoutbtn");
+    		if(logoutBtn == null)System.out.println("Logout btn is not clicked");
+    		else if(logoutBtn.equalsIgnoreCase("Logout")){
+    			%>
+    			<script>
+    			 alert("Logout successfully");
+    				location.replace("../login.html");
+    				</script>
+    			<%
+    			session.invalidate();
+    			
+    		}
+    	%>
     </nav>
+    
     <div id="admin-dash" class="d-block">
         <h1>admin dash</h1>
         <p><%out.println("email: "+email);%></p>
@@ -164,8 +186,7 @@
              				}catch(SQLException e){
              					out.println("Error: \n"+e);
              				}
-             				%>
-             				
+             				%>	
              						
              				        </div>
           <div class="d-none" id="cover-screen">
@@ -206,6 +227,7 @@
             		pstmt.setString(4, id);
             		pstmt.executeUpdate();
             		%>
+            		
             		<script>
             			alert("Data updated successfully");
             		</script>
