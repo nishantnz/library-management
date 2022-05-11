@@ -168,13 +168,11 @@
              								
              									<td>
              									<button class="edit medium btn btn-edit">Edit</button>
-             									<button class="del medium btn btn-del" name = "delete-btn" value = "Delete">Delete</button>	
-             									
+             									<form action ="./deleteBook.jsp">
+             									<button class="del medium btn btn-del" name = "deleteBtn" value = <%=rs.getInt("bookid")%>>Delete</button>	
+             									</form>
              									</td>
-             									
              									</tr>
-             									
-             								
              								<%
              							}
              							pstmt.close();
