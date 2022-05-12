@@ -79,6 +79,26 @@ body {
 .product-container *{
   color: white;
 }
+.slete::before {
+  content: "\f058";
+  font-family: "Font Awesome 5 Free";
+  font-size: 1em;
+  font-weight: 900;
+  color: rgb(38, 187, 38);
+  position: absolute;
+  top: 24px;
+  right: 100px;
+}
+.incomplete::before {
+  content: "\f057";
+  font-family: "Font Awesome 5 Free";
+  font-size: 1em;
+  font-weight: 900;
+  color: #c31;
+  position: absolute;
+  top: 14px;
+  right: 100px;
+}
 /* top part ends */
 /* navigation starts */
 nav{
