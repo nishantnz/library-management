@@ -271,7 +271,7 @@
         </table>
     </div>
     
-<script src="../js/tabFormat.js"></script>
+<script src="../js/tabFormatAdmin.js"></script>
 <script src="../js/updatebooks.js"></script>
 
 </body>
