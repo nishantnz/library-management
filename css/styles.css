@@ -152,6 +152,20 @@ th {
   background:var(--lightBlue);
   color:white;
 }
+.btn-user{
+  padding: .5em .5em;
+  border-radius: 10px;
+  border: none;
+  background:var(--lightBlue);
+  color:white;
+}
+.btn-user:active{
+  background: var(--lightBlue);
+  color:white;
+  padding: .2em .2em;
+  border: 5px rgba(76, 168, 255, 0.578);
+  border-style: outset;
+}
 .btn-edit:active{
   background: var(--lightBlue);
   color:white;
