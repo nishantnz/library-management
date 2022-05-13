@@ -134,11 +134,11 @@
 						query = "select * from books where bookid = " + Integer.parseInt(inputText) + "";
 						break;
 					case "book_name":
-						query = "select * from books where bookName like '" + inputText + "%'";
+						query = "select * from books where bookName like '%" + inputText + "%'";
 						break;
 
 					case "author":
-						query = "select * from books where authorName like '" + inputText + "%'";
+						query = "select * from books where authorName like '%" + inputText + "%'";
 						break;
 
 					default:
