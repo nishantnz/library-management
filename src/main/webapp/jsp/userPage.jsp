@@ -222,13 +222,6 @@ String email = (String) session.getAttribute("email");
 					
 				}
 				%>
-			<!-- 	<tr>
-					<td>34</td>
-					<td>Dummy</td>
-					<td>John Doe</td>
-					<td><a href="#"
-						class="d-block medium btn-user capitalize text-deco-none text-center">Return</a></td>
-				</tr> -->
 			</table>
 		</div>
 	</div>
@@ -241,15 +234,31 @@ String email = (String) session.getAttribute("email");
 					<th>Book ID :</th>
 					<th>Book Name :</th>
 					<th>Author :</th>
-					<th>Return :</th>
+					<th>Renew :</th>
 				</tr>
-				<tr>
-					<td>34</td>
-					<td>Dummy</td>
-					<td>John Doe</td>
-					<td><a href="#"
-						class="d-block medium btn-user capitalize text-deco-none text-center">Renew</a></td>
-				</tr>
+				<%
+					try{
+						connection = DriverManager.getConnection(jdbcUrl,userName,dbPass);
+						if(connection != null){
+							query = "select bookid,bookName,authorName from issuedBooks where issuedBy=?";
+							pstmt = connection.prepareStatement(query);
+							pstmt.setString(1,email);
+							rs = pstmt.executeQuery();
+							while(rs.next()){
+								 %><tr>
+									<td><%=rs.getString("bookid")%></td>
+									<td><%=rs.getString("bookName")%></td>
+									<td><%=rs.getString("authorName")%></td>
+									<td><a href="./renewBook.jsp?bookId=<%=rs.getString("bookid")%>&email=<%=email%>"
+										class="d-block medium btn-user capitalize text-deco-none text-center">Renew</a></td>
+								</tr>
+								<%	
+							}
+						}
+					}catch(SQLException e){
+						System.out.println("Error: \n"+e);
+					}
+				%>
 			</table>
 		</div>
 	</div>
