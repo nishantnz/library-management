@@ -1,20 +1,7 @@
-
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@page import="java.sql.*"%>
 
-<%
-Connection connection = null;
-PreparedStatement pstmt = null;
-String query = "";
-ResultSet rs;
-String userName = "root";
-String dbPass = "";
-String jdbcUrl = "jdbc:mysql://localhost:3306/library_management";
-String firstName = (String) session.getAttribute("firstName");
-String lastName = (String) session.getAttribute("lastName");
-String email = (String) session.getAttribute("email");
-%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,6 +12,31 @@ String email = (String) session.getAttribute("email");
 <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
+<%
+    	response.setHeader("Cache-Control","no-cache");
+    	response.setHeader("Cache-Control","no-store");
+    	response.setHeader("Pragma","no-cache");
+    	response.setDateHeader ("Expires", 0);
+    	
+    	String firstName = (String) session.getAttribute("firstName");
+        String lastName = (String) session.getAttribute("lastName");
+        String email = (String) session.getAttribute("email");
+        
+        if(email == null){
+        	session.invalidate();
+        	response.sendRedirect("../login.html");
+    		
+    	}        
+        Connection connection = null;
+        PreparedStatement pstmt = null;
+        String query = "";
+        ResultSet rs;
+        String userName = "root";
+        String dbPass = "";
+        String jdbcUrl = "jdbc:mysql://localhost:3306/library_management";
+
+
+    	%>
 	<header
 		class="header d-flex justify-content-center align-items-center g-3 p-3">
 		<img src="img/bookStack.jpg" width="90px" alt="">
@@ -46,20 +58,36 @@ String email = (String) session.getAttribute("email");
 		<button type="button" id="renew-btn"
 			class="d-block p-2 links text-center text-deco-none capitalize link-shadow">Renew
 			Books</button>
-		<button type="button" id="btn"
-			class="d-block p-2 links text-center text-deco-none capitalize link-shadow">Logout</button>
+		<form class="d-block p-2 links text-center text-deco-none capitalize link-shadow">
+        <button type="submit" id="btn" class="links" name ="logoutbtn" value = "Logout">Logout</button>
+    	</form>
+    	<%
+    	
+    	String logoutBtn = request.getParameter("logoutbtn");
+		if(logoutBtn == null)System.out.println("Logout btn is not clicked");
+		else if(logoutBtn.equalsIgnoreCase("Logout")){
+			%>
+			<script>
+			 alert("Logout successfully");
+				location.replace("../login.html");
+				</script>
+			<%
+			session.invalidate();
+			
+		}
+    	%>
 	</nav>
 	<div id="user-dash" class="d-block">
 		<h1>Welcome to user Page</h1>
 		<h1>
 			Email:
-			<%=(String) session.getAttribute("email")%></h1>
+			<%=email%></h1>
 		<h1>
 			FirstName:
-			<%=(String) session.getAttribute("firstName")%></h1>
+			<%=firstName%></h1>
 		<h1>
 			LastName:
-			<%=(String) session.getAttribute("lastName")%></h1>
+			<%=lastName%></h1>
 	</div>
 	<div id="issue-books" class="d-none">
 		<h1 class="title text-center mt-3 mb-2 uppercase letter-space">Search
@@ -180,10 +208,8 @@ String email = (String) session.getAttribute("email");
 				}catch(SQLException e){
 					System.out.println("Error: \n "+e);
 				}
-			%>
+				%>
 			</table>
-			
-			
 		</div>
 	</div>
 	<div id="return-books" class="d-none">
@@ -211,7 +237,7 @@ String email = (String) session.getAttribute("email");
 							<td><%=rs.getString("bookid")%></td>
 							<td><%=rs.getString("bookName")%></td>
 							<td><%=rs.getString("authorName")%></td>
-							<td><a href="./returnBook.jsp?bookId=<%=rs.getString("bookid")%>&email=<%=email%>"
+							<td><a href="./returnBook.jsp?bookId=<%=rs.getString("bookid")%>&email=<%=email	%>"
 								class="d-block medium btn-user capitalize text-deco-none text-center">Return</a></td>
 						</tr>
 						<%	
