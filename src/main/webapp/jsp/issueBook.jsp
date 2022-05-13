@@ -39,64 +39,53 @@ try {
 		rs.close();
 		pstmt.close();
 		if (Integer.parseInt(currentAvail) == 0) {
-			%>
-				<script>
-					alert("Book is not available");
-					location.replace("./userPage.jsp");
-				</script>
-			<%
-		} else {
-	query = "select issuedBy,bookid from issuedBooks where issuedBy = ? and bookid = ?";
-	pstmt = connection.prepareStatement(query);
-	pstmt.setString(1,email);
-	pstmt.setString(2,bookId);
-	rs = pstmt.executeQuery();
-	
-	if (rs.next()) {
-	%>
-	<script>
-		alert("Book is already issued by you");
-		location.replace("./userPage.jsp");
-	</script>
-	<%
-	} else {
-		query = "insert into issuedbooks values(?,?,?,?,?,?,?)";
-		pstmt = connection.prepareStatement(query);
-		pstmt.setString(1,bookId);
-		pstmt.setString(2,bookName);
-		pstmt.setString(3,authorName);
-		pstmt.setString(4,email);
-		pstmt.setString(5,user);
-		pstmt.setString(6,issueDate);
-		pstmt.setString(7,returnDate);
-		pstmt.execute();
-		pstmt.close();
-	
-		query ="update books set currentAvail = ? where bookid = ?";
-		pstmt = connection.prepareStatement(query);
-		pstmt.setInt(1,Integer.parseInt(currentAvail)-1);
-		pstmt.setInt(2,Integer.parseInt(bookId));
-		pstmt.executeUpdate();
-	%>
-	<script>
-		alert("Book issued successfully");
-		location.replace("./userPage.jsp");
-	</script>
-	<%
+%>
+<script>
+	alert("Book is not available");
+	location.replace("./userPage.jsp");
+</script>
+<%
+} else {
+query = "select issuedBy,bookid from issuedBooks where issuedBy = ? and bookid = ?";
+pstmt = connection.prepareStatement(query);
+pstmt.setString(1, email);
+pstmt.setString(2, bookId);
+rs = pstmt.executeQuery();
+
+if (rs.next()) {
+%>
+<script>
+	alert("Book is already issued by you");
+	location.replace("./userPage.jsp");
+</script>
+<%
+} else {
+query = "insert into issuedbooks values(?,?,?,?,?,?,?)";
+pstmt = connection.prepareStatement(query);
+pstmt.setString(1, bookId);
+pstmt.setString(2, bookName);
+pstmt.setString(3, authorName);
+pstmt.setString(4, email);
+pstmt.setString(5, user);
+pstmt.setString(6, issueDate);
+pstmt.setString(7, returnDate);
+pstmt.execute();
+pstmt.close();
+
+query = "update books set currentAvail = ? where bookid = ?";
+pstmt = connection.prepareStatement(query);
+pstmt.setInt(1, Integer.parseInt(currentAvail) - 1);
+pstmt.setInt(2, Integer.parseInt(bookId));
+pstmt.executeUpdate();
+%>
+<script>
+	alert("Book issued successfully");
+	location.replace("./userPage.jsp");
+</script>
+<%
 }
 
 }
-/* query = "insert into issuedbooks values(?,?,?,?,?,?,?)";
-pstmt = connection.prepareStatement(query);
-pstmt.setString(1,bookId);
-pstmt.setString(2,bookName);
-pstmt.setString(3,authorName);
-pstmt.setString(4,user);
-pstmt.setString(5,email);
-pstmt.setString(6,issueDate);
-pstmt.setString(7,returnDate);
-pstmt.execute();
- */
 
 }
 } catch (SQLException e) {
