@@ -146,7 +146,7 @@ String email = (String) session.getAttribute("email");
 	</div>
 	<div id="issued-books" class="d-none">
 		<h1 class="title text-center mt-3 mb-2 uppercase letter-space">Books
-			that are Issued to you</h1>
+			that are Issued by you</h1>
 		<div class="d-flex justify-content-center mt-3 mb-5">
 			<table>
                 <tr>
@@ -197,13 +197,38 @@ String email = (String) session.getAttribute("email");
 					<th>Author :</th>
 					<th>Return :</th>
 				</tr>
-				<tr>
+				<%
+				try{
+					connection = DriverManager.getConnection(jdbcUrl,userName,dbPass);
+					if(connection !=null){
+						query = "select bookid,bookName,authorName from issuedbooks where issuedBy = ?";
+						pstmt = connection.prepareStatement(query);
+						pstmt.setString(1,email);
+						rs = pstmt.executeQuery();
+						while(rs.next()){
+							%>
+							<tr>
+							<td><%=rs.getString("bookid")%></td>
+							<td><%=rs.getString("bookName")%></td>
+							<td><%=rs.getString("authorName")%></td>
+							<td><a href="./returnBook.jsp?bookId=<%=rs.getString("bookid")%>&email=<%=email%>"
+								class="d-block medium btn-user capitalize text-deco-none text-center">Return</a></td>
+						</tr>
+						<%	
+						}
+						
+					}
+				}catch(SQLException e){
+					
+				}
+				%>
+			<!-- 	<tr>
 					<td>34</td>
 					<td>Dummy</td>
 					<td>John Doe</td>
 					<td><a href="#"
 						class="d-block medium btn-user capitalize text-deco-none text-center">Return</a></td>
-				</tr>
+				</tr> -->
 			</table>
 		</div>
 	</div>
