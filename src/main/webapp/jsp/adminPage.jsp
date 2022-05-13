@@ -42,8 +42,8 @@
         <button type="button" id="update-btn" class="d-block p-2 links text-center text-deco-none capitalize link-shadow">Update Books</button>
         <button type="button" id="issued-btn" class="d-block p-2 links text-center text-deco-none capitalize link-shadow">Issued Books</button>
         <button type="button" id="view-btn" class="d-block p-2 links text-center text-deco-none capitalize link-shadow">View Books</button>
-        <form>
-        <button type="submit" id="btn" class="d-block p-2 links text-center text-deco-none capitalize link-shadow" name ="logoutbtn" value = "Logout">Logout</button>
+        <form  class="d-block p-2 links text-center text-deco-none capitalize link-shadow">
+        <button type="submit" class="links" id="btn" name ="logoutbtn" value = "Logout">Logout</button>
     	</form>
     	<%
     		String logoutBtn = request.getParameter("logoutbtn");
@@ -60,33 +60,74 @@
     		}
     	%>
     </nav>
-    
+    <%
+    	try{
+    		connection = DriverManager.getConnection(jdbcUrl,userName,dbPass);
+    		if(connection !=null){
+    			// count of users
+    			query = "select count(email_id) from users";
+    			pstmt = connection.prepareStatement(query);
+    			rs = pstmt.executeQuery();
+    			rs.next();
+    			int userCount = rs.getInt(1);
+    			rs.close();
+    			
+    			//count of distinct authors
+    			query ="select count(distinct(authorName)) from books";
+    			pstmt = connection.prepareStatement(query);
+    			rs = pstmt.executeQuery();
+    			rs.next();
+    			int authorCount = rs.getInt(1);
+    			rs.close();
+    			
+    			//count of books
+    			query = "select count(bookName) from books";
+    			rs = pstmt.executeQuery();
+    			rs.next();
+    			int booksCount = rs.getInt(1);
+    			rs.close();
+    			
+    			//bookIssued and returned
+    			query ="select count(bookid) from issuedbooks";
+    			pstmt = connection.prepareStatement(query);
+    			rs = pstmt.executeQuery();
+    			rs.next();
+    			int bookIssuedCount = rs.getInt(1);
+    			rs.close();
+    	
+    %>
     <div id="admin-dash" class="d-block">
         <h1 class="title text-center mt-3 mb-2 uppercase letter-space">Admin Dashboard</h1>
         <div class="container-md">
             <div class="d-flex g-4 justify-content-center flex-wrap">
                 <div class="fb-30 p-3 d-flex dir-col justify-content-center align-items-center box-shadow b-radius">
                     <i class="fas fa-users larger"></i>
-                    <h3 class="title">Total Users : 78</h3>
+                    <h3 class="title">Total Users : <%=userCount%></h3>
                 </div>
                 <div class="fb-30 p-3 d-flex dir-col justify-content-center align-items-center box-shadow b-radius">
                     <i class="fas fa-layer-group larger"></i>
-                    <h3 class="title">Total Books : 78</h3>
+                    <h3 class="title">Total Books :<%=booksCount%></h3>
                 </div>
                 <div class="fb-30 p-3 d-flex dir-col justify-content-center align-items-center box-shadow b-radius">
                     <i class="fas fa-user-tie larger"></i>
-                    <h3 class="title">Total Authors : 78</h3>
+                    <h3 class="title">Total Authors : <%=authorCount%></h3>
                 </div>
                 <div class="fb-30 p-3 d-flex dir-col justify-content-center align-items-center box-shadow b-radius pos-rel complete">
                     <i class="fas fa-layer-group larger"></i>
-                    <h3 class="title">Books Issued : 78</h3>
+                    <h3 class="title">Books Issued : <%=bookIssuedCount%></h3>
                 </div>
                 <div class="fb-30 p-3 d-flex dir-col justify-content-center align-items-center box-shadow b-radius pos-rel incomplete">
                     <i class="fas fa-layer-group larger"></i>
-                    <h3 class="title text-center">Books Not Returned : 78</h3>
+                    <h3 class="title text-center">Books Not Returned : <%=bookIssuedCount%></h3>
                 </div>                
             </div>
-        </div>    
+        </div>
+        <%
+        	}
+    	}catch(SQLException e){
+    		System.out.println("Error: \n"+e);
+    	} 
+    %>
     </div>
     <div id="add-books" class="d-none">
         <div class="d-flex dir-col justify-content-center align-items-center">
@@ -146,7 +187,8 @@
              									<th>BookName</th>
              									<th>AuthorName</th>
              									<th>Quantity</th>
-             									<th>Operation</th>
+             									<th>Edit</th>
+             									<th>Delete</th>
              									
              				<%
              				String search = request.getParameter("search");
@@ -190,6 +232,8 @@
              								
              									<td>
              									<button class="edit medium btn btn-edit">Edit</button>
+             									</td>
+             									<td>
              									<form action ="./deleteBook.jsp">
              									<button class="del medium btn btn-del" name = "deleteBtn" value = <%=rs.getInt("bookid")%>>Delete</button>	
              									</form>
@@ -262,8 +306,42 @@
 
     </div>
     
-    <div id="issued-books" class="d-none">
-        <h1>issued books</h1>
+    <div id="issued-books" style ="margin-top:70px" class="d-none">
+        <table style ="margin:auto">
+        <tr>
+        <th>BookId</th>
+        <th>BookName</th>
+        <th>AuthorName</th>
+        <th>IssuedBy</th>
+        <th>IssueDate</th>
+        <th>ReturnDate</th>
+        </tr>
+        <%
+        	try{
+        		connection = DriverManager.getConnection(jdbcUrl,userName,dbPass);
+        		if(connection !=null){
+        			query = "select * from issuedbooks";
+        			pstmt = connection.prepareStatement(query);
+        			rs = pstmt.executeQuery();
+        			while(rs.next()){
+        				 %>
+        					<tr>
+        						<td><%=rs.getString("bookid")%></td>
+        						<td><%=rs.getString("bookName")%></td>
+        						<td><%=rs.getString("authorName")%></td>
+        						<td><%=rs.getString("issuedBy")%></td>
+        						<td><%=rs.getString("issueDate")%></td>
+        						<td><%=rs.getString("returnDate")%></td>
+        					</tr>
+        				<%
+        			}
+        		}
+        	}catch(SQLException e){
+        		System.out.println("Error: \n"+e);
+        	}
+
+        %>
+        </table>
     </div>
     <div id="view-books" style = "margin-top:90px" class="d-none">
     	<table style = "margin:auto">
