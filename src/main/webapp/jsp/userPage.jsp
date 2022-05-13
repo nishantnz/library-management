@@ -9,6 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>User Page</title>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
@@ -78,16 +79,23 @@
     	%>
 	</nav>
 	<div id="user-dash" class="d-block">
-		<h1>Welcome to user Page</h1>
-		<h1>
-			Email:
-			<%=email%></h1>
-		<h1>
-			FirstName:
-			<%=firstName%></h1>
-		<h1>
-			LastName:
-			<%=lastName%></h1>
+		<h1 class="title text-center mt-3 mb-2 uppercase letter-space">Admin Dashboard</h1>
+        <div class="container-md">
+            <div class="d-flex g-4 justify-content-center flex-wrap">
+                <div class="fb-40 p-3 d-flex dir-col justify-content-center align-items-center box-shadow b-radius">
+                    <i class="fas fa-book larger"></i>
+                    <h3 class="title capitalize">Click to issue book</h3>
+                </div>
+                <div class="fb-40 p-3 d-flex dir-col justify-content-center align-items-center box-shadow b-radius">
+                    <i class="fas fa-exchange-alt larger"></i>
+                    <h3 class="title capitalize">Click to return books</h3>
+                </div>
+                <div class="fb-40 p-3 d-flex dir-col justify-content-center align-items-center box-shadow b-radius">
+                    <i class="fas fa-external-link-alt larger"></i>
+                    <h3 class="title capitalize">Click to renew books</h3>
+                </div>               
+            </div>
+        </div>
 	</div>
 	<div id="issue-books" class="d-none">
 		<h1 class="title text-center mt-3 mb-2 uppercase letter-space">Search
